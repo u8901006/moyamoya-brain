@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+"""Generate index.html listing all Moyamoya daily reports."""
+
+import glob
+import os
+from datetime import datetime
+
+html_files = sorted(glob.glob("docs/moyamoya-*.html"), reverse=True)
+links = ""
+for f in html_files[:60]:
+    name = os.path.basename(f)
+    date = name.replace("moyamoya-", "").replace(".html", "")
+    try:
+        d = datetime.strptime(date, "%Y-%m-%d")
+        weekday = ["一", "二", "三", "四", "五", "六", "日"][d.weekday()]
+        date_display = f"{d.year}年{d.month}月{d.day}日（週{weekday}）"
+    except Exception:
+        date_display = date
+        weekday = ""
+    links += f'            <li><a href="{name}">📅 {date_display}</a></li>\n'
+
+total = len(html_files)
+
+index_html = f"""<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moyamoya Brain - 每日文獻日報</title>
+<meta name="description" content="Moyamoya 病（毛毛樣腦血管疾病）每日文獻追蹤與 AI 分析報告">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {{
+    --bg: #f6f1e8;
+    --card: #ffffff;
+    --text: #2c1810;
+    --text2: #6b5b50;
+    --accent: #2c6fbb;
+    --accent2: #8c4f2b;
+    --border: #e8ddd0;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(44,24,16,0.07);
+}}
+* {{ margin:0; padding:0; box-sizing:border-box; }}
+body {{
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 16px 60px;
+}}
+header {{ text-align: center; margin-bottom: 40px; }}
+.logo {{ font-size: 56px; margin-bottom: 12px; }}
+h1 {{
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+}}
+.subtitle {{ color: var(--text2); font-size: 15px; margin-bottom: 16px; }}
+.stats {{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 16px;
+}}
+.stat {{
+    background: var(--card);
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}}
+.stat-num {{ font-size: 24px; font-weight: 700; color: var(--accent2); }}
+.stat-label {{ font-size: 12px; color: var(--text2); }}
+
+.section-title {{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+}}
+
+ul {{
+    list-style: none;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}}
+li {{ border-bottom: 1px solid var(--border); }}
+li:last-child {{ border-bottom: none; }}
+li a {{
+    display: block;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 15px;
+    transition: background 0.2s;
+}}
+li a:hover {{ background: #f6f1e8; }}
+
+.clinic-banner {{
+    background: linear-gradient(135deg, #2c6fbb, #1a4f8b);
+    color: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    margin: 36px 0 24px;
+}}
+.clinic-banner h3 {{ font-size: 16px; margin-bottom: 12px; }}
+.clinic-links {{ display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }}
+.clinic-links a {{
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: none;
+    transition: transform 0.2s;
+}}
+.clinic-links a:hover {{ transform: translateY(-2px); }}
+.btn-primary {{ background: white; color: #2c6fbb; }}
+.btn-secondary {{ background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); }}
+
+footer {{
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+}}
+footer a {{ color: var(--accent); text-decoration: none; }}
+
+@media (max-width: 600px) {{
+    body {{ padding: 20px 10px 40px; }}
+    h1 {{ font-size: 24px; }}
+    .stats {{ flex-direction: column; gap: 10px; }}
+}}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🧠</div>
+    <h1>Moyamoya Brain</h1>
+    <p class="subtitle">Moyamoya 病（毛毛樣腦血管疾病）每日文獻追蹤與 AI 分析</p>
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-num">{total}</div>
+            <div class="stat-label">歷史日報</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">14</div>
+            <div class="stat-label">搜尋模板</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">AI</div>
+            <div class="stat-label">GLM-5.1 分析</div>
+        </div>
+    </div>
+</header>
+
+<div class="section-title">📋 歷史日報</div>
+<ul>
+{links}
+</ul>
+
+<div class="clinic-banner">
+    <h3>🏥 李政洋身心診所</h3>
+    <div class="clinic-links">
+        <a href="https://www.leepsyclinic.com/" target="_blank" class="btn-primary">🏠 診所首頁</a>
+        <a href="https://blog.leepsyclinic.com/" target="_blank" class="btn-secondary">📧 訂閱電子報</a>
+    </div>
+</div>
+
+<footer>
+    <p>Moyamoya Brain &copy; {datetime.now().year} — Powered by PubMed + Zhipu AI (GLM-5.1)</p>
+    <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a></p>
+</footer>
+
+</body>
+</html>"""
+
+os.makedirs("docs", exist_ok=True)
+with open("docs/index.html", "w", encoding="utf-8") as f:
+    f.write(index_html)
+print(
+    f"[INFO] Index page generated with {total} reports", file=__import__("sys").stderr
+)

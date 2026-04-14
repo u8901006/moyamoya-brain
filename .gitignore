@@ -1,0 +1,9 @@
+papers.json
+__pycache__/
+*.pyc
+node_modules/
+.env
+.env.local
+.DS_Store
+docs/
+!docs/.gitkeep
