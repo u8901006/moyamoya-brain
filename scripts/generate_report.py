@@ -16,7 +16,7 @@ import httpx
 API_BASE = os.environ.get(
     "ZHIPU_API_BASE", "https://open.bigmodel.cn/api/coding/paas/v4"
 )
-MODEL_NAME = os.environ.get("ZHIPU_MODEL", "glm-5.1")
+MODEL_NAME = os.environ.get("ZHIPU_MODEL", "GLM-5-Turbo")
 
 SYSTEM_PROMPT = (
     "你是腦血管醫學與神經科學領域的資深研究員與科學傳播者，專精於 Moyamoya 病（毛毛樣腦血管疾病）研究。你的任務是：\n"
@@ -45,7 +45,7 @@ def call_zhipu_api(api_key: str, messages: list, max_retries: int = 3) -> str:
         "temperature": 0.7,
         "max_tokens": 8192,
     }
-    models_to_try = [MODEL_NAME, "glm-4-plus", "glm-4-flash", "glm-4"]
+    models_to_try = [MODEL_NAME, "GLM-4.7", "GLM-4.7-Flash"]
 
     for model in models_to_try:
         payload["model"] = model
@@ -480,7 +480,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
         <span class="badge">📅 {date_display}（週{weekday}）</span>
         <span class="badge accent">📄 {paper_count} 篇文獻</span>
     </div>
-    <p class="powered">Powered by PubMed + Zhipu AI (GLM-5.1)</p>
+    <p class="powered">Powered by PubMed + Zhipu AI (GLM-5-Turbo)</p>
 </header>
 
 <div class="summary-card">
@@ -506,7 +506,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
 </div>
 
 <footer>
-    <p>Moyamoya Brain &copy; {date_str[:4]} — 自動生成於 {datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")} (CST)</p>
+    <p>Moyamoya Brain &copy; {date_str[:4]} — 自動生成於 {datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")} (CST) | Model: GLM-5-Turbo</p>
     <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a> · <a href="index.html">📋 歷史日報</a></p>
 </footer>
 
