@@ -5,6 +5,7 @@ Uses search templates from moyamoya_disease_journals_keywords_pubmed_templates.m
 """
 
 import json
+import os
 import sys
 import argparse
 import xml.etree.ElementTree as ET
@@ -139,6 +140,53 @@ def fetch_details(pmids: list[str]) -> list[dict]:
     return papers
 
 
+def load_history(history_path: str, keep_days: int = 7) -> set[str]:
+    seen = set()
+    if not history_path or not os.path.exists(history_path):
+        return seen
+    try:
+        with open(history_path, "r", encoding="utf-8") as f:
+            history = json.load(f)
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime(
+            "%Y-%m-%d"
+        )
+        for date_str, pmids in history.items():
+            if date_str >= cutoff:
+                seen.update(pmids)
+        print(
+            f"[INFO] Loaded {len(seen)} seen PMIDs from last {keep_days} days",
+            file=sys.stderr,
+        )
+    except Exception as e:
+        print(f"[WARN] Could not load history: {e}", file=sys.stderr)
+    return seen
+
+
+def save_history(history_path: str, new_pmids: list[str], keep_days: int = 7) -> None:
+    if not history_path:
+        return
+    history = {}
+    if os.path.exists(history_path):
+        try:
+            with open(history_path, "r", encoding="utf-8") as f:
+                history = json.load(f)
+        except Exception:
+            pass
+    today = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime(
+        "%Y-%m-%d"
+    )
+    history = {k: v for k, v in history.items() if k >= cutoff}
+    history[today] = list(set(history.get(today, []) + new_pmids))
+    os.makedirs(os.path.dirname(history_path) or ".", exist_ok=True)
+    with open(history_path, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+    print(
+        f"[INFO] Saved {len(new_pmids)} new PMIDs to history (keeping last {keep_days} days)",
+        file=sys.stderr,
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Fetch Moyamoya disease papers from PubMed"
@@ -149,7 +197,14 @@ def main():
     )
     parser.add_argument("--output", default="-", help="Output file (- for stdout)")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument(
+        "--history",
+        default="",
+        help="Path to PMIDs history JSON for dedup (e.g. docs/pmids_history.json)",
+    )
     args = parser.parse_args()
+
+    seen_pmids = load_history(args.history, keep_days=7)
 
     all_pmids = set()
     for i, query in enumerate(SEARCH_QUERIES):
@@ -165,9 +220,15 @@ def main():
             file=sys.stderr,
         )
 
-    pmid_list = list(all_pmids)[: args.max_papers]
+    new_pmids = all_pmids - seen_pmids
     print(
-        f"[INFO] Fetching details for {len(pmid_list)} unique papers...",
+        f"[INFO] After dedup: {len(new_pmids)} new papers (excluded {len(all_pmids - new_pmids)} already seen)",
+        file=sys.stderr,
+    )
+
+    pmid_list = list(new_pmids)[: args.max_papers]
+    print(
+        f"[INFO] Fetching details for {len(pmid_list)} unique new papers...",
         file=sys.stderr,
     )
 
@@ -191,6 +252,10 @@ def main():
 
     papers = fetch_details(pmid_list)
     print(f"[INFO] Fetched details for {len(papers)} papers", file=sys.stderr)
+
+    save_history(
+        args.history, [p["pmid"] for p in papers if p.get("pmid")], keep_days=7
+    )
 
     output_data = {
         "date": datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d"),

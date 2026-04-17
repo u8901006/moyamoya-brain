@@ -57,7 +57,8 @@ jobs:
             --days 7 \
             --max-papers 40 \
             --json \
-            --output papers.json
+            --output papers.json \
+            --history docs/pmids_history.json
         continue-on-error: true
 
       - name: Check papers data
