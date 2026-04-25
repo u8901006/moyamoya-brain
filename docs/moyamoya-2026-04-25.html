@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moyamoya Brain - 2026年4月25日（週六）</title>
+<meta name="description" content="Moyamoya 病每日文獻日報 2026年4月25日">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #f6f1e8;
+    --card: #ffffff;
+    --text: #2c1810;
+    --text2: #6b5b50;
+    --accent: #2c6fbb;
+    --accent2: #8c4f2b;
+    --border: #e8ddd0;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #c0392b;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(44,24,16,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+}
+header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 32px;
+}
+.logo { font-size: 48px; margin-bottom: 8px; }
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.badge.accent { background: #fdf6f0; color: var(--accent2); }
+.powered { font-size: 12px; color: var(--text2); margin-top: 10px; }
+
+.section { margin-bottom: 36px; }
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #eef4fb 0%, #f6f1e8 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.8;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+}
+.top-card { border-left: 4px solid var(--accent2); }
+.rank-badge {
+    position: absolute;
+    top: -8px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-right: 40px;
+    line-height: 1.5;
+}
+.summary { color: var(--text2); font-size: 14px; margin-bottom: 12px; }
+
+.pico-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    background: #faf7f2;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+.pico-item strong { color: var(--accent2); margin-right: 4px; }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.clinical { font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 12px; }
+.clinical-高 { background: #e8f8ef; color: var(--success); }
+.clinical-中 { background: #fef9e7; color: var(--warning); }
+.clinical-低 { background: #fdf2f2; color: var(--danger); }
+
+.topic-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.topic-label { width: 160px; font-size: 13px; text-align: right; flex-shrink: 0; }
+.topic-bar-bg {
+    flex: 1;
+    height: 20px;
+    background: #e8ddd0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.topic-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    transition: width 0.5s;
+}
+.topic-count { font-size: 13px; color: var(--text2); width: 30px; }
+
+.keywords-section { margin-bottom: 32px; }
+.keyword-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px;
+    border-radius: 16px;
+    font-size: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+}
+
+.clinic-banner {
+    background: linear-gradient(135deg, #2c6fbb, #1a4f8b);
+    color: white;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    margin: 36px 0 24px;
+}
+.clinic-banner h3 { font-size: 18px; margin-bottom: 12px; }
+.clinic-banner p { font-size: 14px; opacity: 0.9; margin-bottom: 16px; }
+.clinic-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.clinic-links a {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.clinic-links a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.btn-primary { background: white; color: #2c6fbb; }
+.btn-secondary { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); }
+
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+.empty-msg {
+    text-align: center;
+    color: var(--text2);
+    padding: 40px 20px;
+    font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    body { padding: 12px 10px 40px; }
+    header { padding: 24px 12px 20px; }
+    h1 { font-size: 22px; }
+    .card { padding: 16px; }
+    .pico-grid { grid-template-columns: 1fr; }
+    .topic-label { width: 100px; font-size: 12px; }
+    .clinic-links { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🧠</div>
+    <h1>Moyamoya Brain</h1>
+    <p style="color:var(--text2);font-size:15px;">Moyamoya 病每日文獻日報</p>
+    <div class="header-badges">
+        <span class="badge">📅 2026年4月25日（週六）</span>
+        <span class="badge accent">📄 0 篇文獻</span>
+    </div>
+    <p class="powered">Powered by PubMed + Zhipu AI (GLM-5-Turbo)</p>
+</header>
+
+<div class="summary-card">
+    <div class="section-title" style="border:none;padding:0;margin:0 0 8px;">📊 今日文獻趨勢</div>
+    今日尚未找到新的 Moyamoya 病相關文獻。
+</div>
+
+
+
+
+
+
+
+
+
+<div class="clinic-banner">
+    <h3>🏥 李政洋身心診所</h3>
+    <p>專業身心科醫療服務，關心您的心理健康</p>
+    <div class="clinic-links">
+        <a href="https://www.leepsyclinic.com/" target="_blank" class="btn-primary">🏠 診所首頁</a>
+        <a href="https://blog.leepsyclinic.com/" target="_blank" class="btn-secondary">📧 訂閱電子報</a>
+    </div>
+</div>
+
+<footer>
+    <p>Moyamoya Brain &copy; 2026 — 自動生成於 2026-04-25 16:03 (CST) | Model: GLM-5-Turbo</p>
+    <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a> · <a href="index.html">📋 歷史日報</a></p>
+</footer>
+
+</body>
+</html>
