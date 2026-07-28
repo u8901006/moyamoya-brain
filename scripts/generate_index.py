@@ -162,7 +162,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
         </div>
         <div class="stat">
             <div class="stat-num">AI</div>
-            <div class="stat-label">GLM-5.1 分析</div>
+            <div class="stat-label">NVIDIA Nemotron 分析</div>
         </div>
     </div>
 </header>
@@ -181,7 +181,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
 </div>
 
 <footer>
-    <p>Moyamoya Brain &copy; {datetime.now().year} — Powered by PubMed + Zhipu AI (GLM-5.1)</p>
+    <p>Moyamoya Brain &copy; {datetime.now().year} — Powered by PubMed + NVIDIA Nemotron</p>
     <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a></p>
 </footer>
 

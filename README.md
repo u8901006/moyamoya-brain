@@ -7,7 +7,7 @@
 本專案透過 GitHub Actions 每日自動執行以下流程：
 
 1. **PubMed 搜尋** — 使用 14 組專業搜尋模板，涵蓋腦血管外科、神經影像、小兒神經、認知功能、復健醫學、物理治療、職能治療、語言治療等領域
-2. **AI 分析** — 透過 Zhipu AI (GLM-5.1) 進行繁體中文摘要、PICO 分析、臨床實用性評估
+2. **AI 分析** — 透過 NVIDIA Nemotron 進行繁體中文摘要、PICO 分析、臨床實用性評估
 3. **網頁生成** — 自動產生精美 HTML 日報，部署至 GitHub Pages
 
 ## 線上閱讀
@@ -47,7 +47,7 @@ PubMed E-utilities API
     papers.json
         │
         ▼
-  generate_report.py (Zhipu AI GLM-5.1)
+  generate_report.py (NVIDIA Nemotron)
         │
         ▼
   docs/moyamoya-YYYY-MM-DD.html

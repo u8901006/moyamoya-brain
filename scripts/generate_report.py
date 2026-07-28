@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate Moyamoya disease daily report HTML using Zhipu AI (GLM-5.1).
+Generate Moyamoya disease daily report HTML using NVIDIA Nemotron.
 Reads papers JSON, analyzes with AI, generates styled HTML.
 """
 
@@ -13,10 +13,9 @@ from datetime import datetime, timezone, timedelta
 
 import httpx
 
-API_BASE = os.environ.get(
-    "ZHIPU_API_BASE", "https://open.bigmodel.cn/api/coding/paas/v4"
-)
-MODEL_NAME = os.environ.get("ZHIPU_MODEL", "GLM-5-Turbo")
+API_BASE = "https://integrate.api.nvidia.com/v1"
+MODEL_NAME = "nvidia/nemotron-3-super-120b-a12b"
+FALLBACK_MODEL = "nvidia/nemotron-3-nano-30b-a3b"
 
 SYSTEM_PROMPT = (
     "你是腦血管醫學與神經科學領域的資深研究員與科學傳播者，專精於 Moyamoya 病（毛毛樣腦血管疾病）研究。你的任務是：\n"
@@ -33,7 +32,7 @@ SYSTEM_PROMPT = (
 )
 
 
-def call_zhipu_api(api_key: str, messages: list, max_retries: int = 3) -> str:
+def call_nvidia_api(api_key: str, messages: list, max_retries: int = 3) -> str:
     url = f"{API_BASE}/chat/completions"
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -42,10 +41,13 @@ def call_zhipu_api(api_key: str, messages: list, max_retries: int = 3) -> str:
     payload = {
         "model": MODEL_NAME,
         "messages": messages,
-        "temperature": 0.7,
+        "temperature": 1.0,
+        "top_p": 0.95,
         "max_tokens": 8192,
+        "stream": False,
+        "chat_template_kwargs": {"enable_thinking": False},
     }
-    models_to_try = [MODEL_NAME, "GLM-4.7", "GLM-4.7-Flash"]
+    models_to_try = [MODEL_NAME, FALLBACK_MODEL]
 
     for model in models_to_try:
         payload["model"] = model
@@ -480,7 +482,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
         <span class="badge">📅 {date_display}（週{weekday}）</span>
         <span class="badge accent">📄 {paper_count} 篇文獻</span>
     </div>
-    <p class="powered">Powered by PubMed + Zhipu AI (GLM-5-Turbo)</p>
+    <p class="powered">Powered by PubMed + NVIDIA Nemotron</p>
 </header>
 
 <div class="summary-card">
@@ -506,7 +508,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
 </div>
 
 <footer>
-    <p>Moyamoya Brain &copy; {date_str[:4]} — 自動生成於 {datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")} (CST) | Model: GLM-5-Turbo</p>
+    <p>Moyamoya Brain &copy; {date_str[:4]} — 自動生成於 {datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")} (CST) | Model: {MODEL_NAME}</p>
     <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a> · <a href="index.html">📋 歷史日報</a></p>
 </footer>
 
@@ -519,14 +521,14 @@ def main():
     parser.add_argument("--input", required=True, help="Papers JSON file")
     parser.add_argument("--output", required=True, help="Output HTML file")
     parser.add_argument(
-        "--api-key", default="", help="Zhipu API key (or set ZHIPU_API_KEY env)"
+        "--api-key", default="", help="NVIDIA API key (or set NVIDIA_API_KEY env)"
     )
     args = parser.parse_args()
 
-    api_key = args.api_key or os.environ.get("ZHIPU_API_KEY", "")
+    api_key = args.api_key or os.environ.get("NVIDIA_API_KEY", "")
     if not api_key:
         print(
-            "[ERROR] No API key provided. Set ZHIPU_API_KEY or use --api-key",
+            "[ERROR] No API key provided. Set NVIDIA_API_KEY or use --api-key",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -611,8 +613,8 @@ def main():
         {"role": "user", "content": user_prompt},
     ]
 
-    print("[INFO] Calling Zhipu AI for analysis...", file=sys.stderr)
-    raw_response = call_zhipu_api(api_key, messages)
+    print("[INFO] Calling NVIDIA Nemotron for analysis...", file=sys.stderr)
+    raw_response = call_nvidia_api(api_key, messages)
 
     if raw_response:
         analysis = parse_ai_response(raw_response)
