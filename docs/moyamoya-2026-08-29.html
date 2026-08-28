@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moyamoya Brain - 2026年8月29日（週六）</title>
+<meta name="description" content="Moyamoya 病每日文獻日報 2026年8月29日">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #f6f1e8;
+    --card: #ffffff;
+    --text: #2c1810;
+    --text2: #6b5b50;
+    --accent: #2c6fbb;
+    --accent2: #8c4f2b;
+    --border: #e8ddd0;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #c0392b;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(44,24,16,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+}
+header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 32px;
+}
+.logo { font-size: 48px; margin-bottom: 8px; }
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.badge.accent { background: #fdf6f0; color: var(--accent2); }
+.powered { font-size: 12px; color: var(--text2); margin-top: 10px; }
+
+.section { margin-bottom: 36px; }
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #eef4fb 0%, #f6f1e8 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.8;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+}
+.top-card { border-left: 4px solid var(--accent2); }
+.rank-badge {
+    position: absolute;
+    top: -8px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-right: 40px;
+    line-height: 1.5;
+}
+.summary { color: var(--text2); font-size: 14px; margin-bottom: 12px; }
+
+.pico-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    background: #faf7f2;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+.pico-item strong { color: var(--accent2); margin-right: 4px; }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.clinical { font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 12px; }
+.clinical-高 { background: #e8f8ef; color: var(--success); }
+.clinical-中 { background: #fef9e7; color: var(--warning); }
+.clinical-低 { background: #fdf2f2; color: var(--danger); }
+
+.topic-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.topic-label { width: 160px; font-size: 13px; text-align: right; flex-shrink: 0; }
+.topic-bar-bg {
+    flex: 1;
+    height: 20px;
+    background: #e8ddd0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.topic-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    transition: width 0.5s;
+}
+.topic-count { font-size: 13px; color: var(--text2); width: 30px; }
+
+.keywords-section { margin-bottom: 32px; }
+.keyword-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px;
+    border-radius: 16px;
+    font-size: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+}
+
+.clinic-banner {
+    background: linear-gradient(135deg, #2c6fbb, #1a4f8b);
+    color: white;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    margin: 36px 0 24px;
+}
+.clinic-banner h3 { font-size: 18px; margin-bottom: 12px; }
+.clinic-banner p { font-size: 14px; opacity: 0.9; margin-bottom: 16px; }
+.clinic-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.clinic-links a {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.clinic-links a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.btn-primary { background: white; color: #2c6fbb; }
+.btn-secondary { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); }
+
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+.empty-msg {
+    text-align: center;
+    color: var(--text2);
+    padding: 40px 20px;
+    font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    body { padding: 12px 10px 40px; }
+    header { padding: 24px 12px 20px; }
+    h1 { font-size: 22px; }
+    .card { padding: 16px; }
+    .pico-grid { grid-template-columns: 1fr; }
+    .topic-label { width: 100px; font-size: 12px; }
+    .clinic-links { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🧠</div>
+    <h1>Moyamoya Brain</h1>
+    <p style="color:var(--text2);font-size:15px;">Moyamoya 病每日文獻日報</p>
+    <div class="header-badges">
+        <span class="badge">📅 2026年8月29日（週六）</span>
+        <span class="badge accent">📄 8 篇文獻</span>
+    </div>
+    <p class="powered">Powered by PubMed + NVIDIA Nemotron</p>
+</header>
+
+<div class="summary-card">
+    <div class="section-title" style="border:none;padding:0;margin:0 0 8px;">📊 今日文獻趨勢</div>
+    今日文獻聚焦於 Moyamoya 病的多面向研究，包括血管外科手術創新（如多領域血管再建）、基因與全身血管病關聯（RNF213 與極動脈粥樣硬化）、特殊人群（Down syndrome、小兒出血型）臨床表現及罕見血管變異共病病例。臨床實用性較高的研究強調個體化手術策略、早期介入及多學科評估，反轉傳統僅聚焦於中大腦動脈領域的治療模式，而遺傳與合併症研究則提醒 Moyamoya 病應納入較廣泛的血管病理思考框架。
+</div>
+
+<div class='section'><div class='section-title'>🏆 今日精選 TOP Picks</div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">1</div>
+            <h3>多領域個體化血管再建於成人 Moyamoya 病患：擴展再建方法至前腦動脈與後腦動脈領域</h3>
+            <p class="summary">首次大規模病例系列證明在經影像評估後，對前腦動脈與後腦動脈領域進行補充性血管再建於成人 Moyamoya 病患者中是安全且有效的，血管通暢率與側枝循環發育良好。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 經血流動力學不足確認的成人 Moyamoya 病患者</div><div class='pico-item'><strong>I</strong> 基於 PET-CT 或 CO2 誘發呼吸屏保 MRI 之多領域（ACA/PCA）個體化血管再建術（直達或間接）</div><div class='pico-item'><strong>C</strong> 傳統僅限於中腦動脈（MCA）領域的血管再建</div><div class='pico-item'><strong>O</strong> 12 個月後血管通暢率（直達橋）及側枝循環發育程度（間接手術），並評估術後神經功能</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">神經影像學</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">2</div>
+            <h3>視網膜動脈阻塞如何揭示 Moyamoya 病：病例系列與描述性研究</h3>
+            <p class="summary">視網膜動脈阻塞（RAO）可為 Moyamoya 病的首發或早期表現，尤其為中央視網膜動脈阻塞（CRAO），提醒眼科與神經內科應警覺此種罕見但重要的血管聯繫。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 同時罹患 Moyamoya 病與視網膜動脈阻塞（MMD-RAO）的患者（n=18）</div><div class='pico-item'><strong>I</strong> 無（描述性病例系列）</div><div class='pico-item'><strong>C</strong> 文獻報告之歷史病例 vs 本中心近年病例</div><div class='pico-item'><strong>O</strong> 年齡、初診及治療後最佳矯正視力（BCVA）、RAO 亞型分佈、視力復原程度</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">神經影像學</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">3</div>
+            <h3>RNF213 p.R4810K 變異與顱外頸動脈疾病之關聯：超越顱內動脈粥樣硬化的獨立影響</h3>
+            <p class="summary">RNF213 p.R4810K 變異攜帶者即使在調整顱內動脈粥樣硬化後，仍顯著增加顱外頸動脈疾病（≥50% 狹窄）風險，提示此基因變異具有更廣泛的全身性血管易感性。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 急性缺血性中暑或短暫性腦缺血發作患者（n=13,994）來自福冈中風登錄</div><div class='pico-item'><strong>I</strong> RNF213 p.R4810K 變異攜帶（G/A 或 A/A 基因型）</div><div class='pico-item'><strong>C</strong> 非攜帶者（G/G）</div><div class='pico-item'><strong>O</strong> 經調整血管危險因子與顱內動脈粥樣硬化後，顱外頸動脈疾病（ECAD）之發生機率（Odds Ratio）及嚴重度分層關聯</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">基礎研究</span><span class="tag">流行病學</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#8c4f2b;">4</div>
+            <h3>中國 Moyamoya 病與 Moyamoya 綜合症之診斷與治療專家共識（2024）</h3>
+            <p class="summary">全面更新之專家共識強調以高解析度影像早期診斷、個體化手術規劃（尤以血管再建為核心）、並針對缺血事件、認知下降及側枝循環形成進行藥物管理，以提升長期預後與生活品質。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> Moyamoya 病（MMD）患者</div><div class='pico-item'><strong>I</strong> 基於流行病學、遺傳學與影像學進展（2017 後）之更新診斷與治療策略</div><div class='pico-item'><strong>C</strong> 2017 年版共識</div><div class='pico-item'><strong>O</strong> 診斷準確度（如 Suzuki 分期修補、側枝循環評級）、手術個體化程度、perioperative 併發症控制、長期神經功能與生活品質改善</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">神經影像學</span><span class="tag">系統性回顧</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#8c4f2b;">5</div>
+            <h3>Down syndrome 相關 Moyamoya 綜合症：診斷延遲與中風為首發表現之多中心研究</h3>
+            <p class="summary">Down syndrome 合併 Moyamoya 綜合症患者中風作為首發症狀的比例顯著高於非 Down syndrome 組（71.4% vs 20.7%），且診斷延遲更長，提醒該高危族群需提早神經血管篩檢。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 兒童 Moyamoya 綜合症患者，分為 Down syndrome 合併組（DS-MMS，n=77）與非 Down syndrome 組（MMS，n=121）</div><div class='pico-item'><strong>I</strong> Down syndrome 狀態</div><div class='pico-item'><strong>C</strong> 無 Down syndrome 之 Moyamoya 綜合症</div><div class='pico-item'><strong>O</strong> 中風是否為首發症狀、從症狀 onset 到就診及診斷確認之時間延遲、後循環佔比、1 年神經預後</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">小兒神經學</span><span class="tag">流行病學</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div></div>
+
+<div class='section'><div class='section-title'>📚 其他文獻</div>
+        <div class="card">
+            <h3>小兒出血型 Moyamoya 病之臨床特徵、治療與長期預後：廣泛隨訪研究</h3>
+            <p class="summary">小兒出血型 Moyamoya 病在第二個十年才顯現出血高峰，早期進行 encephaloduroarteriosynangiosis (EDAS) 手術可顯著降低再出血與術後併發症風險，提示時機關鍵干預的重要性。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">小兒神經學</span><span class="tag">腦血管外科手術</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>肺動脈高壓併 Moyamoya 病並帶有 RNF213 p.Arg4810Lys 變異之病例報告：對單一藥物治療的良好反應</h3>
+            <p class="summary">一例年輕女性併發重度肺動脈高壓與 Moyamoya 病，經內皮素受體拮抗劑（macitentan）單一藥物治療改善肺血流動力學後，再進行血管繞道手術，顯示在複雜合併症下，個體化治療策略可帶來獲益。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">病例報告</span><span class="tag">基礎研究</span></div>
+                <span class="clinical clinical-低">臨床實用性：低</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>先天性外頸動脈-內頸動脈吻合併 Moyamoya 病之磁共振血管造影診斷病例</h3>
+            <p class="summary">首次報告先天性外內頸動脈異常吻合（形成頸部動脈環）與 Moyamoya 病共病，提醒血管異形發育可能為 Moyamoya 病發病之易感因子之一，需高解析度 MRA 協助診斷。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">神經影像學</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-低">臨床實用性：低</span>
+            </div>
+        </div></div>
+
+<div class='section'><div class='section-title'>📈 主題分佈</div>
+            <div class="topic-bar-row">
+                <span class="topic-label">腦血管外科手術</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:100%"></div></div>
+                <span class="topic-count">4</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">神經影像學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:100%"></div></div>
+                <span class="topic-count">4</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">流行病學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:75%"></div></div>
+                <span class="topic-count">3</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">小兒神經學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:75%"></div></div>
+                <span class="topic-count">3</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">基礎研究</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:50%"></div></div>
+                <span class="topic-count">2</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">病例報告</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:75%"></div></div>
+                <span class="topic-count">3</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">系統性回顧</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:25%"></div></div>
+                <span class="topic-count">1</span>
+            </div></div>
+
+<div class='keywords-section'><div class='section-title'>🏷️ 關鍵字</div><span class="keyword-pill">Moyamoya disease</span><span class="keyword-pill">revascularization</span><span class="keyword-pill">RNF213</span><span class="keyword-pill">retinal artery occlusion</span><span class="keyword-pill">Down syndrome</span><span class="keyword-pill">pediatric hemorrhagic</span><span class="keyword-pill">expert consensus</span><span class="keyword-pill">pulmonary hypertension</span><span class="keyword-pill">vascular anomaly</span></div>
+
+<div class="clinic-banner">
+    <h3>🏥 李政洋身心診所</h3>
+    <p>專業身心科醫療服務，關心您的心理健康</p>
+    <div class="clinic-links">
+        <a href="https://www.leepsyclinic.com/" target="_blank" class="btn-primary">🏠 診所首頁</a>
+        <a href="https://blog.leepsyclinic.com/" target="_blank" class="btn-secondary">📧 訂閱電子報</a>
+    </div>
+</div>
+
+<footer>
+    <p>Moyamoya Brain &copy; 2026 — 自動生成於 2026-08-29 03:13 (CST) | Model: nvidia/nemotron-3-super-120b-a12b</p>
+    <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a> · <a href="index.html">📋 歷史日報</a></p>
+</footer>
+
+</body>
+</html>
