@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moyamoya Brain - 2026年9月6日（週日）</title>
+<meta name="description" content="Moyamoya 病每日文獻日報 2026年9月6日">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #f6f1e8;
+    --card: #ffffff;
+    --text: #2c1810;
+    --text2: #6b5b50;
+    --accent: #2c6fbb;
+    --accent2: #8c4f2b;
+    --border: #e8ddd0;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #c0392b;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(44,24,16,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+}
+header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 32px;
+}
+.logo { font-size: 48px; margin-bottom: 8px; }
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.badge.accent { background: #fdf6f0; color: var(--accent2); }
+.powered { font-size: 12px; color: var(--text2); margin-top: 10px; }
+
+.section { margin-bottom: 36px; }
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #eef4fb 0%, #f6f1e8 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.8;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+}
+.top-card { border-left: 4px solid var(--accent2); }
+.rank-badge {
+    position: absolute;
+    top: -8px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-right: 40px;
+    line-height: 1.5;
+}
+.summary { color: var(--text2); font-size: 14px; margin-bottom: 12px; }
+
+.pico-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    background: #faf7f2;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+.pico-item strong { color: var(--accent2); margin-right: 4px; }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.clinical { font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 12px; }
+.clinical-高 { background: #e8f8ef; color: var(--success); }
+.clinical-中 { background: #fef9e7; color: var(--warning); }
+.clinical-低 { background: #fdf2f2; color: var(--danger); }
+
+.topic-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.topic-label { width: 160px; font-size: 13px; text-align: right; flex-shrink: 0; }
+.topic-bar-bg {
+    flex: 1;
+    height: 20px;
+    background: #e8ddd0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.topic-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    transition: width 0.5s;
+}
+.topic-count { font-size: 13px; color: var(--text2); width: 30px; }
+
+.keywords-section { margin-bottom: 32px; }
+.keyword-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px;
+    border-radius: 16px;
+    font-size: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+}
+
+.clinic-banner {
+    background: linear-gradient(135deg, #2c6fbb, #1a4f8b);
+    color: white;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    margin: 36px 0 24px;
+}
+.clinic-banner h3 { font-size: 18px; margin-bottom: 12px; }
+.clinic-banner p { font-size: 14px; opacity: 0.9; margin-bottom: 16px; }
+.clinic-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.clinic-links a {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.clinic-links a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.btn-primary { background: white; color: #2c6fbb; }
+.btn-secondary { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); }
+
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+.empty-msg {
+    text-align: center;
+    color: var(--text2);
+    padding: 40px 20px;
+    font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    body { padding: 12px 10px 40px; }
+    header { padding: 24px 12px 20px; }
+    h1 { font-size: 22px; }
+    .card { padding: 16px; }
+    .pico-grid { grid-template-columns: 1fr; }
+    .topic-label { width: 100px; font-size: 12px; }
+    .clinic-links { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🧠</div>
+    <h1>Moyamoya Brain</h1>
+    <p style="color:var(--text2);font-size:15px;">Moyamoya 病每日文獻日報</p>
+    <div class="header-badges">
+        <span class="badge">📅 2026年9月6日（週日）</span>
+        <span class="badge accent">📄 5 篇文獻</span>
+    </div>
+    <p class="powered">Powered by PubMed + NVIDIA Nemotron</p>
+</header>
+
+<div class="summary-card">
+    <div class="section-title" style="border:none;padding:0;margin:0 0 8px;">📊 今日文獻趨勢</div>
+    今日文獻聚焦於 Moyamoya 病的多維度研究，從罕見合併症（如 Down  syndrome、視網膜動脈閉塞、先天性血管異常）到手術併發症（如手術後 perfusion mismatch 導致梗塞）、診斷生物標記探索（Olink proteomics）及罕見血管變異報告。研究強調早期診斷的重要性，特別是在高風險族群如 Down  syndrome 儿童中，stroke 為主要首發症狀且診斷延遲顯著。手術規劃方面，術前 perfusion 指導的 recipient artery 選擇被證實為關鍵，以避免 hemodynamic territory mismatch。基礎研究則揭示免疫與炎症通路在病機中的潛在角色，為未來生物標記與靶向治療奠基。整體趨勢顯示臨床實踐與精準醫學方向的交叉發展。
+</div>
+
+<div class='section'><div class='section-title'>🏆 今日精選 TOP Picks</div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">1</div>
+            <h3>Down  syndrome 相關 Moyamoya 症候群： stroke 為主要表現且診斷延遲顯著</h3>
+            <p class="summary">Down  syndrome 伴 Moyamoya 病患兒童以 stroke 為首發症狀的比例顯著高於非 Down  syndrome 組，且診斷延遲較長，提醒需加強此高風險群的早期篩查。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> Down  syndrome 兒童伴 Moyamoya 病 (DS-MMS) vs 無 Down  syndrome Moyamoya 病 (MMS)</div><div class='pico-item'><strong>I</strong> 無特定干預（觀察性研究）</div><div class='pico-item'><strong>C</strong> DS-MMS 與 MMS 群組比較</div><div class='pico-item'><strong>O</strong> stroke 作為主要表現症狀、診斷延遲、血管影像特徵、術前收縮血壓百分位數、1 年神經預後</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">小兒神經學</span><span class="tag">腦血管外科手術</span><span class="tag">流行病學</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">2</div>
+            <h3>視網膜動脈閉塞可為 Moyamoya 病的早期眼科表現</h3>
+            <p class="summary">Moyamoya 病患者可伴隨視網膜動脈閉塞（以中央型為主），視力恢復不佳，提醒神經科與眼科合作以早期發現潛在腦血管病變。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> Moyamoya 病伴視網膜動脈閉塞患者（n=18）</div><div class='pico-item'><strong>I</strong> 無特定干預（描述性病例序列）</div><div class='pico-item'><strong>C</strong> 院內隊列 vs 文獻報告病例</div><div class='pico-item'><strong>O</strong> 視力變化 (BCVA logMAR)、視網膜動脈閉塞 subtype 分布、年齡差異、視力預後</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">神經影像學</span><span class="tag">神經眼科</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">3</div>
+            <h3>術後後腦動脈中腦前區梗塞由血流動力學領域不匹配引發</h3>
+            <p class="summary">即使 STA-MCA 術後血管通暢，若吻合區域不符合 perfusion 最不足區域，仍可能導致術後梗塞，強調術前 perfusion 引導的吻合規劃必要性。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 一位 47 歲女性，雙側 Moyamoya 病，術前 perfusion 顯示右後 MCA 與 PCA 区域血流最不足</div><div class='pico-item'><strong>I</strong> 單瓣 STA-MCA 旁路術（前額 STA 分支吻合至顳動脈 M4 分支）+ EDAS</div><div class='pico-item'><strong>C</strong> 術前預期再灌注區域 vs 實際梗塞區域</div><div class='pico-item'><strong>O</strong> 術後第一日出現右後 MCA 区域梗塞，術後兩月 DSA 顯示旁路通暢且 ChA-PA 逆轉</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">神經影像學</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#8c4f2b;">4</div>
+            <h3>透過血清免疫蛋白質組學識別 Moyamoya 病的潛在診斷生物標記</h3>
+            <p class="summary">利用 Olink 平台分析 92 種免疫相關蛋白質，識別出 MGMT、SIT1、PRDX1、TRAF2 為潛在 biomarkers，其中 TRAF2 與 PRDX1 在患者群中表達顯著異常，並以 XGBoost 模型達成最高診斷 AUC。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> Moyamoya 病患者 (n=88) vs 健康對照 (n=88)</div><div class='pico-item'><strong>I</strong> 血清 Olink 免疫蛋白質組 panel 檢測</div><div class='pico-item'><strong>C</strong> 患者 vs 對照組蛋白質表達差異</div><div class='pico-item'><strong>O</strong> 差異表達蛋白質識別、GO/KEGG 通路 enrichment、診斷模型 AUC (XGBoost 最佳)、藥物重新適配預測</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">基礎研究</span><span class="tag">免疫學</span><span class="tag">分子生物學</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#8c4f2b;">5</div>
+            <h3>先天性外頸動脈-內頸動脈吻合伴 Moyamoya 病之磁共振血管造影首例報告</h3>
+            <p class="summary">報告一例罕見先天性外-內頸動脈異常吻合形成頸動脈環，伴已知 Moyamoya 病的 12 歲女兒，症狀自發緩解，提醒血管異形可能影響病程與治療決策。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 一位 12 歲女童，既往史：已知 Moyamoya 病，曾接受間接再血管化術</div><div class='pico-item'><strong>I</strong> 無積極介入（保守治療）</div><div class='pico-item'><strong>C</strong> 無對照組（單一病例報告）</div><div class='pico-item'><strong>O</strong> MRI/MRA 所見：右側頸部 ECA-ICA 吻合形成動脈環、症狀自發緩解、無急性缺血病変</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">神經影像學</span><span class="tag">血管異形</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-低">臨床實用性：低</span>
+            </div>
+        </div></div>
+
+
+
+<div class='section'><div class='section-title'>📈 主題分佈</div>
+            <div class="topic-bar-row">
+                <span class="topic-label">腦血管外科手術</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:66%"></div></div>
+                <span class="topic-count">2</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">小兒神經學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:33%"></div></div>
+                <span class="topic-count">1</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">神經影像學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:100%"></div></div>
+                <span class="topic-count">3</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">病例報告</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:100%"></div></div>
+                <span class="topic-count">3</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">基礎研究</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:33%"></div></div>
+                <span class="topic-count">1</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">流行病學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:33%"></div></div>
+                <span class="topic-count">1</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">免疫學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:33%"></div></div>
+                <span class="topic-count">1</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">神經眼科</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:33%"></div></div>
+                <span class="topic-count">1</span>
+            </div></div>
+
+<div class='keywords-section'><div class='section-title'>🏷️ 關鍵字</div><span class="keyword-pill">Moyamoya disease</span><span class="keyword-pill">Down syndrome</span><span class="keyword-pill">stroke</span><span class="keyword-pill">STA-MCA bypass</span><span class="keyword-pill">hemodynamic mismatch</span><span class="keyword-pill">retinal artery occlusion</span><span class="keyword-pill">Olink proteomics</span><span class="keyword-pill">biomarker</span><span class="keyword-pill">congenital arterial anastomosis</span><span class="keyword-pill">MRA</span></div>
+
+<div class="clinic-banner">
+    <h3>🏥 李政洋身心診所</h3>
+    <p>專業身心科醫療服務，關心您的心理健康</p>
+    <div class="clinic-links">
+        <a href="https://www.leepsyclinic.com/" target="_blank" class="btn-primary">🏠 診所首頁</a>
+        <a href="https://blog.leepsyclinic.com/" target="_blank" class="btn-secondary">📧 訂閱電子報</a>
+    </div>
+</div>
+
+<footer>
+    <p>Moyamoya Brain &copy; 2026 — 自動生成於 2026-09-06 19:29 (CST) | Model: nvidia/nemotron-3-super-120b-a12b</p>
+    <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a> · <a href="index.html">📋 歷史日報</a></p>
+</footer>
+
+</body>
+</html>
