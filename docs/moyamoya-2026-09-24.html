@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moyamoya Brain - 2026年9月24日（週四）</title>
+<meta name="description" content="Moyamoya 病每日文獻日報 2026年9月24日">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #f6f1e8;
+    --card: #ffffff;
+    --text: #2c1810;
+    --text2: #6b5b50;
+    --accent: #2c6fbb;
+    --accent2: #8c4f2b;
+    --border: #e8ddd0;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #c0392b;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(44,24,16,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+}
+header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 32px;
+}
+.logo { font-size: 48px; margin-bottom: 8px; }
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.badge.accent { background: #fdf6f0; color: var(--accent2); }
+.powered { font-size: 12px; color: var(--text2); margin-top: 10px; }
+
+.section { margin-bottom: 36px; }
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #eef4fb 0%, #f6f1e8 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.8;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+}
+.top-card { border-left: 4px solid var(--accent2); }
+.rank-badge {
+    position: absolute;
+    top: -8px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-right: 40px;
+    line-height: 1.5;
+}
+.summary { color: var(--text2); font-size: 14px; margin-bottom: 12px; }
+
+.pico-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    background: #faf7f2;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+.pico-item strong { color: var(--accent2); margin-right: 4px; }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: #eef4fb;
+    color: var(--accent);
+}
+.clinical { font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 12px; }
+.clinical-高 { background: #e8f8ef; color: var(--success); }
+.clinical-中 { background: #fef9e7; color: var(--warning); }
+.clinical-低 { background: #fdf2f2; color: var(--danger); }
+
+.topic-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.topic-label { width: 160px; font-size: 13px; text-align: right; flex-shrink: 0; }
+.topic-bar-bg {
+    flex: 1;
+    height: 20px;
+    background: #e8ddd0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.topic-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    transition: width 0.5s;
+}
+.topic-count { font-size: 13px; color: var(--text2); width: 30px; }
+
+.keywords-section { margin-bottom: 32px; }
+.keyword-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px;
+    border-radius: 16px;
+    font-size: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text2);
+}
+
+.clinic-banner {
+    background: linear-gradient(135deg, #2c6fbb, #1a4f8b);
+    color: white;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    margin: 36px 0 24px;
+}
+.clinic-banner h3 { font-size: 18px; margin-bottom: 12px; }
+.clinic-banner p { font-size: 14px; opacity: 0.9; margin-bottom: 16px; }
+.clinic-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.clinic-links a {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.clinic-links a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.btn-primary { background: white; color: #2c6fbb; }
+.btn-secondary { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); }
+
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+.empty-msg {
+    text-align: center;
+    color: var(--text2);
+    padding: 40px 20px;
+    font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    body { padding: 12px 10px 40px; }
+    header { padding: 24px 12px 20px; }
+    h1 { font-size: 22px; }
+    .card { padding: 16px; }
+    .pico-grid { grid-template-columns: 1fr; }
+    .topic-label { width: 100px; font-size: 12px; }
+    .clinic-links { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🧠</div>
+    <h1>Moyamoya Brain</h1>
+    <p style="color:var(--text2);font-size:15px;">Moyamoya 病每日文獻日報</p>
+    <div class="header-badges">
+        <span class="badge">📅 2026年9月24日（週四）</span>
+        <span class="badge accent">📄 16 篇文獻</span>
+    </div>
+    <p class="powered">Powered by PubMed + NVIDIA Nemotron</p>
+</header>
+
+<div class="summary-card">
+    <div class="section-title" style="border:none;padding:0;margin:0 0 8px;">📊 今日文獻趨勢</div>
+    今日Moyamoya病研究聚焦於神經影像評估（特別是血管高強度訊號）、出血型自然病史、手術技術優化（如雙管STA-MCA繞道）以及新興生物標記（如Nit2/ω-amidase）。多篇研究強調非侵入性影像與血漿生物標記在風險分層與術後評估中的潛力，同時關注資源匱乏地區與特殊人群（如小兒鎌狀紅血球病患者）的臨床實踐挑戰。
+</div>
+
+<div class='section'><div class='section-title'>🏆 今日精選 TOP Picks</div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">1</div>
+            <h3>自然病史與出血型Moyamoya病患者的臨床結果：大規模隊列研究</h3>
+            <p class="summary">在1,050例出血型Moyamoya病患者中，前 choroidal 動脈擴張與女性性別為再出血的獨立危險因子，間接血管重建術顯著改善預後。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 出血型Moyamoya病患者（n=1,050，平均首次出血年齡37.0歲）</div><div class='pico-item'><strong>I</strong> 間接血管重建術（encephaloduroarteriosynangiosis, EDAS）</div><div class='pico-item'><strong>C</strong> 自然病史組（未行手術）</div><div class='pico-item'><strong>O</strong> 再出血事件與不良預後</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">流行病學</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">2</div>
+            <h3>血管高強度訊號（HVS）於MRI中評估腦血管疾病：方法、特徵與臨床意義</h3>
+            <p class="summary">HVS（特別是FLAIR與ASL序列）為非侵入性評估血流動力學不足、側枝徵募與預後之有效標誌，但需標準化評分系統以提升跨研究比較性。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 腦血管疾病患者（含Moyamoya病）</div><div class='pico-item'><strong>I</strong> 多序列MRI評估（FLAIR、ASL、對比強化T1WI、HR-VWI）</div><div class='pico-item'><strong>C</strong> 無（敘述性文獻綜述）</div><div class='pico-item'><strong>O</strong> 血流動力學評估、缺血風險、疾病進展、預後</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">神經影像學</span><span class="tag">腦血管外科手術</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#c0392b;">3</div>
+            <h3>單管 versus 雙管顳動脈對中腦動脈繞道術於Moyamoya病之術後中風結果：系統性回顧與梅他分析</h3>
+            <p class="summary">雙管STA-MCA繞道術相比單管術在術後中風發生率上無顯著差異（OR=1.28，95%CI：0.26-6.3），支持兩種技術具有相近短中期安全性。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 接受直接STA-MCA繞道術之Moyamoya病患者</div><div class='pico-item'><strong>I</strong> 雙管STA-MCA繞道術</div><div class='pico-item'><strong>C</strong> 單管STA-MCA繞道術</div><div class='pico-item'><strong>O</strong> 術後中風發生率</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">系統性回顧</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#8c4f2b;">4</div>
+            <h3>救援性直接繞道術於先前血管重建不足之Moyamoya病患者：再利用或保存顳動脈分支之可行性</h3>
+            <p class="summary">在五例經先前血管重建術後再發中風的Moyamoya病患者中，重複使用或保存之顳動脈分支進行救援直接繞道術皆成功術前通暢，術中及術後無缺血或出血併發症。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 先前血管重建後再發中風之Moyamoya病患者（n=5）</div><div class='pico-item'><strong>I</strong> 使用再利用或保存之顳動脈分支進行救援直接或合併血管重建</div><div class='pico-item'><strong>C</strong> 無（案例系列）</div><div class='pico-item'><strong>O</strong> 繞道術通暢率、術中/術後併發症、復發中風</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card top-card">
+            <div class="rank-badge" style="background:#8c4f2b;">5</div>
+            <h3>Nit2/ω-amidase 作為Moyamoya病之潛在非侵入性診斷標誌</h3>
+            <p class="summary">在0-19歲Moyamoya病患者的血漿與尿液中，Nit2/ω-amidase 水平顯著升高，經Olink與ELISA驗證後具有區別患者與健康對照組之潛力（AUC未明確報告，但異常顯著）。</p>
+            <div class='pico-grid'><div class='pico-item'><strong>P</strong> 0-19歲Moyamoya病患者（n=58尿液、n=29血漿）及年齡性別匹配健康對照（n=23）</div><div class='pico-item'><strong>I</strong> 血漿或尿液中Nit2/ω-amidase 水平測定</div><div class='pico-item'><strong>C</strong> 健康對照組</div><div class='pico-item'><strong>O</strong> 區別Moyamoya病患者與對照組</div></div>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">基礎研究</span><span class="tag">神經影像學</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div></div>
+
+<div class='section'><div class='section-title'>📚 其他文獻</div>
+        <div class="card">
+            <h3>視網膜動脈阻塞如何揭示Moyamoya病：病例系列與敘述性研究</h3>
+            <p class="summary">Moyamoya病患者併發視網膜動脈阻塞（多為中央型）多見於較年長者，視力恢復有限，提示需警惕全身性血管病變。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">小兒神經學</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>鐮狀紅血球病患者按年齡劃分之共病：印第安納州鐮狀紅血球病資料收集（IN-SCDC）</h3>
+            <p class="summary">在鐮狀紅血球病患者中，Moyamoya病多見於青少年期，隨年齡增加而共病負擔上升，提示需早期篩選與多 discipline 照護。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">流行病學</span><span class="tag">小兒神經學</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>兒童鐮狀紅血球病伴Moyamoya症候群之全球負擔及對神經外科人力需求之影響：系統性回顧</h3>
+            <p class="summary">全球約36,587例兒童鐮狀紅血球病伴Moyamoya病（pSCD|MMS），其中約18,219例可能獲益於血管重建手術，非洲地區負擔最重。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">流行病學</span><span class="tag">系統性回顧</span></div>
+                <span class="clinical clinical-高">臨床實用性：高</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>成人發病型Moyamoya病以反覆缺血性中風為首發：CT灌注與數位減影血管造影在繞道術規劃中的角色</h3>
+            <p class="summary">一名32歲菲律賓女性因反覆側葉梗塞及血流動力學不足被診斷為Moyamoya病，CT灌注與DSA互補評估左側STA-MCA繞道術時機與範圍。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">神經影像學</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>前顱窩硬腦膜靜脈動脈瘻併發Moyamoya病之一例</h3>
+            <p class="summary">報告一例60歲男性併發前顱窩硬腦膜靜脈動脈瘻（dAVF）與無症狀Moyamoya病，提醒在Moyamoya病追蹤中需警惕罕見血管病變共存。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">病例報告</span><span class="tag">腦血管外科手術</span></div>
+                <span class="clinical clinical-低">臨床實用性：低</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>於Moyamoya-like血管中之不可及動脈瘤的血管內治療：浮動線圈技術</h3>
+            <p class="summary">針對Moyamoya病中源自後腦動脈之不可及動脈瘤，創新使用浮動線圈技術成功封閉親動脈，術後無新發神經缺損，mRS 0於2月隨訪。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">腦血管外科手術</span><span class="tag">病例報告</span></div>
+                <span class="clinical clinical-中">臨床實用性：中</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>神經纖維腫症 type 1 之心臟累及：來自三級單一中心隊列的真實世界基線與隨訪發現</h3>
+            <p class="summary">在114例兒童神經纖維腫症 type 1 患者中，心臟異常多見於瓣膜（57.1%），隨訪中異常檢出率上升，提示需長期心臟追蹤。</p>
+            <div class="card-footer">
+                <div class="tags"><span class="tag">基礎研究</span></div>
+                <span class="clinical clinical-低">臨床實用性：低</span>
+            </div>
+        </div></div>
+
+<div class='section'><div class='section-title'>📈 主題分佈</div>
+            <div class="topic-bar-row">
+                <span class="topic-label">腦血管外科手術</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:100%"></div></div>
+                <span class="topic-count">8</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">神經影像學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:62%"></div></div>
+                <span class="topic-count">5</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">流行病學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:50%"></div></div>
+                <span class="topic-count">4</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">病例報告</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:50%"></div></div>
+                <span class="topic-count">4</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">基礎研究</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:37%"></div></div>
+                <span class="topic-count">3</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">系統性回顧</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:37%"></div></div>
+                <span class="topic-count">3</span>
+            </div>
+            <div class="topic-bar-row">
+                <span class="topic-label">小兒神經學</span>
+                <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:37%"></div></div>
+                <span class="topic-count">3</span>
+            </div></div>
+
+<div class='keywords-section'><div class='section-title'>🏷️ 關鍵字</div><span class="keyword-pill">Moyamoya病</span><span class="keyword-pill">血管高強度訊號</span><span class="keyword-pill">間接血管重建</span><span class="keyword-pill">STA-MCA繞道術</span><span class="keyword-pill">Nit2/ω-amidase</span><span class="keyword-pill">出血型Moyamoya病</span><span class="keyword-pill">視網膜動脈阻塞</span><span class="keyword-pill">鐮狀紅血球病</span><span class="keyword-pill">神經纖維腫症 type 1</span><span class="keyword-pill">浮動線圈技術</span></div>
+
+<div class="clinic-banner">
+    <h3>🏥 李政洋身心診所</h3>
+    <p>專業身心科醫療服務，關心您的心理健康</p>
+    <div class="clinic-links">
+        <a href="https://www.leepsyclinic.com/" target="_blank" class="btn-primary">🏠 診所首頁</a>
+        <a href="https://blog.leepsyclinic.com/" target="_blank" class="btn-secondary">📧 訂閱電子報</a>
+    </div>
+</div>
+
+<footer>
+    <p>Moyamoya Brain &copy; 2026 — 自動生成於 2026-09-24 20:30 (CST) | Model: nvidia/nemotron-3-super-120b-a12b</p>
+    <p style="margin-top:4px;"><a href="https://github.com/u8901006/moyamoya-brain" target="_blank">GitHub</a> · <a href="index.html">📋 歷史日報</a></p>
+</footer>
+
+</body>
+</html>
